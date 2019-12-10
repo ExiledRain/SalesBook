@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Sale Book</title>
-        <link rel="stylesheet" href="/sstyle.css">
+        <link rel="stylesheet" href="./styles/sstyle.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -13,7 +13,10 @@
     </head>
     <body>
 
-    <div class="container mt-4">
+    <div class="zull"></div>
+    <div class="mt-3 ml-2">
+        <#--        <img src="../Users/vassilimoskaljov/Desktop/My Fork/SalesBook/src/main/resources/img/fazeway.gif" style="display: block;">-->
+        <#--        <img src="./img/faze.png" style="display: block;">-->
         <#nested>
     </div>
     <!-- Optional JavaScript -->
