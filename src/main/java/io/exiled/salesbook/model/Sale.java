@@ -12,7 +12,6 @@ import javax.persistence.Id;
 @Setter
 @Entity(name = "sale")
 public class Sale {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

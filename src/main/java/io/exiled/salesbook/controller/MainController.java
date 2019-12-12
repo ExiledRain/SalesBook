@@ -21,8 +21,10 @@ public class MainController {
     }
 
     @GetMapping("/sales")
-    public String getSales(Model model) {
+    public String getSales(@RequestParam(required = false, defaultValue = "")String ename, Model model) {
         List<Sale> sales = saleRepo.findAll();
+        List<Sale> saleList = saleRepo.findByName(ename);
+        model.addAttribute("saleList", saleList);
         model.addAttribute("sales", sales);
         return "sales";
     }
@@ -33,12 +35,11 @@ public class MainController {
             @RequestParam(name = "email", required = false) String email,
             @RequestParam(name = "cat", required = false) String cat,
             @RequestParam int totalCost,
-            @RequestParam(name = "description", required = true, defaultValue = "In progress...") String description,
+            @RequestParam(name = "description", defaultValue = "In progress...") String description,
             @RequestParam boolean isDone,
             Model model
     ) {
         Sale sale = new Sale(totalCost, name, cat, email, description, isDone);
-//        String
         saleRepo.save(sale);
         List<Sale> sales = saleRepo.findAll();
         model.addAttribute("sales", sales);
@@ -47,13 +48,8 @@ public class MainController {
     }
 
     @PostMapping("search")
-    public String search(
-            @RequestParam String ename,
-            Model model
-    ) {
-        List<Sale> saleList = saleRepo.findByName(ename);
-        model.addAttribute("saleList", saleList);
-        return "search";
+    public String search() {
+        return "main";
     }
 
     @Autowired

@@ -1,6 +1,7 @@
 <#import "parts/common.ftlh" as p>
-
+<#import "parts/login.ftlh" as l>
 <@p.page>
+    <@l.logout />
     <div>
         <form method="post" action="search">
             <input type="text" name="ename" placeholder="Name you looking for?"/>
@@ -18,27 +19,36 @@
             <button type="submit" class="btn btn-outline-info btn-sm center">Add</button>
         </form>
     </div>
-    <div>
+    <div class="container row col-md-6">
         <div class="table-responsive-sm">
             <table class="table table-bordered table-hover table-striped">
-                    <tr class="thead-light">
-                        <th class="col-sm">Id</th>
-                        <th class="col">Name</th>
-                        <th class="col">Group</th>
-                        <th class="col">Email</th>
-                        <th class="col">Total cost</th>
-                        <th class="col-bg-1">Description</th>
-                        <th class="col">Status</th>
+                <colgroup>
+                    <col class="col-sm-1">
+                    <col class="col-sm-2">
+                    <col class="col-sm-2">
+                    <col class="col-sm-2">
+                    <col class="col-sm-1">
+                    <col class="col-sm-3">
+                    <col class="col-sm-1">
+                </colgroup>
+                <tr class="thead-light">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Group</th>
+                        <th>Email</th>
+                        <th>Total cost</th>
+                        <th>Description</th>
+                        <th>Status</th>
                     </tr>
                 <#list sales as sale>
                         <tr>
-                            <th class="col">${sale.id}</th>
-                            <th class="col">${sale.name}</th>
-                            <th class="col">${sale.cat}</th>
-                            <th class="col">${sale.email}</th>
-                            <th class="col">${sale.totalCost} Eur</th>
-                            <th class="col-sm-1">${sale.description}</th>
-                            <th class="col">${sale.isDone()?c}</th>
+                            <th>${sale.id}</th>
+                            <th>${sale.name}</th>
+                            <th>${sale.cat}</th>
+                            <th>${sale.email}</th>
+                            <th>${sale.totalCost} Eur</th>
+                            <th>${sale.description}</th>
+                            <th>${sale.isDone()?c}</th>
                         </tr>
                 </#list>
             </table>
