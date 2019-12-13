@@ -14,6 +14,7 @@
     <body>
 
     <div class="zull"></div>
+    <#include "navbar.ftlh">
     <div class="mt-3 ml-2">
         <#nested>
     </div>
