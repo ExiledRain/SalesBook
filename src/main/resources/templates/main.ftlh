@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as p>
 <#import "parts/login.ftlh" as l>
 <@p.page>
-    <@l.logout />
+<#--    <@l.logout />-->
     <div>
         <form method="post" action="search">
             <input type="text" name="ename" placeholder="Name you looking for?" value="${ename!}"/>
