@@ -1,41 +1,57 @@
 package io.exiled.salesbook.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
+
+@Getter
+@Setter
 @Entity(name = "usr")
-public class User {
-
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String login;
+    private String username;
     private String password;
+    private boolean active;
 
-    public Long getId() {
-        return id;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
+
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
     }
 
-    public String getLogin() {
-        return login;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public boolean isEnabled() {
+        return isActive();
     }
 }
