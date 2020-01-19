@@ -5,7 +5,7 @@
     <div>
         <form method="post" action="search">
             <input type="text" name="ename" placeholder="Name you looking for?" value="${ename!}"/>
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+<#--            <input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
             <button type="submit" class="btn btn-outline-info btn-sm center">Look</button>
         </form>
     </div>
@@ -17,7 +17,7 @@
             <input type="text" name="totalCost" placeholder="Total cost:"/>
             <input type="text" name="description" placeholder="Description:"/>
             <input type="checkbox" name="isDone" placeholder="Ready?"/>
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+<#--            <input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
             <button type="submit" class="btn btn-outline-info btn-sm center">Add</button>
         </form>
     </div>
