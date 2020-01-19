@@ -21,6 +21,6 @@
 <#--                </li>>-->
 <#--            </#if>-->
         </ul>
-<#--        <div class="navbar-text">${name}</div>-->
+        <div class="navbar-text">Seller X</div>
     </div>
 </nav>
