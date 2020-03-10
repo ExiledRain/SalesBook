@@ -2,7 +2,6 @@ package io.exiled.salesbook.controller;
 
 import io.exiled.salesbook.model.Sale;
 import io.exiled.salesbook.repos.SaleRepo;
-import io.exiled.salesbook.service.AlpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,36 +17,10 @@ import java.util.List;
 public class MainController {
     private SaleRepo saleRepo;
 
-    @Autowired
-    private AlpService alpService;
-
     @Value("${upload.path}")
     private String uploadPath;
 
     @GetMapping("/")
-    public String getStarted() {
-        return "greeting";
-    }
-
-    @RequestMapping("/images")
-    public String getAlps(Model model) {
-        alpService.refresh();
-        alpService.getPaths();
-        alpService.makeCollection();
-        model.addAttribute("alps",alpService.getAlps());
-        return "images";
-    }
-
-    @GetMapping("/alpha")
-    public String getAlp(Model model) {
-        alpService.refresh();
-        alpService.getPaths();
-        alpService.makeCollection();
-        model.addAttribute("alps", alpService.getAlps());
-        return "alpha";
-    }
-
-    @GetMapping("/main")
     public String getSales(@RequestParam(required = false, defaultValue = "")String ename, Model model) {
         List<Sale> sales = saleRepo.findAll();
         List<Sale> saleList = saleRepo.findByName(ename);

@@ -1,5 +1,4 @@
 <#import "parts/common.ftlh" as p>
-<#import "parts/login.ftlh" as l>
 <@p.page>
 <#--    <@l.logout />-->
     <div>
