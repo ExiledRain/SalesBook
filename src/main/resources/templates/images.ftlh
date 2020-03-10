@@ -5,7 +5,11 @@
         <#list alps as alp>
             <div class="col-4 mb-4">
                 <div class="card text-white bg-dark">
-                    <img src="img${alp.getPath()}" class="card-img-top" alt="${alp.getPath()}">
+                    <input type="checkbox" id="cb+${alp.getName()}"/>
+                    <label for="cb+${alp.getName()}">
+                        <img src="img${alp.getPath()}" class="card-img-top" alt="${alp.getPath()}">
+                    </label>
+
                     <div class="card-body">
                         <p class="card-text small">Short name: ${alp.getName()}</p>
                     </div>
