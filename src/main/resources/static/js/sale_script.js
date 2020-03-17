@@ -7,7 +7,7 @@
 // private String description;
 // id,totalCost,name,cat,email,description
 function getIndex(list, id) {
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
             return i;
         }
@@ -19,7 +19,7 @@ function getIndex(list, id) {
 let customActions = {
     getAll: {method: 'GET', url: '/sale/all'},
     addOne: {method: 'POST', url: '/sale/add'},
-    updateOne: {method: 'PUT', url: '/sale/update'},
+    updateOne: {method: 'PUT', url: '/sale/update{/id}'},
     getOne: {method: 'GET', url: '/sale/get{/id}'},
     deleteOne: {method: 'DELETE', url: '/sale/delete{/id}'}
 }
@@ -69,7 +69,7 @@ Vue.component('sale-form', {
             };
 
             if (this.id) {
-                saleApi.updateOne({}, sale).then(result =>
+                saleApi.updateOne({id: this.id}, sale).then(result =>
                     result.json().then(data => {
                         let index = getIndex(this.sales, data.id);
                         this.sales.splice(index, 1, data);
@@ -85,10 +85,10 @@ Vue.component('sale-form', {
                     result.json().then(data => {
                         this.sales.push(data);
                         this.name = '';
-                        this.description = ''
-                        this.cat = ''
-                        this.email = ''
-                        this.totalCost = ''
+                        this.description = '';
+                        this.cat = '';
+                        this.email = '';
+                        this.totalCost = '';
                     })
                 )
             }
