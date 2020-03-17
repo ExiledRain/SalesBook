@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -20,13 +19,13 @@ public class MainController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    @GetMapping("/")
+    @GetMapping("/m")
     public String getSales(@RequestParam(required = false, defaultValue = "")String ename, Model model) {
         List<Sale> sales = saleRepo.findAll();
         List<Sale> saleList = saleRepo.findByName(ename);
         model.addAttribute("saleList", saleList);
         model.addAttribute("sales", sales);
-        return "main";
+        return "main_old";
     }
 
     @PostMapping("/main")
@@ -35,21 +34,20 @@ public class MainController {
             @RequestParam(name = "email", required = false) String email,
             @RequestParam(name = "cat", required = false) String cat,
             @RequestParam int totalCost,
-            @RequestParam(name = "description", defaultValue = "In progress...") String description,
-            @RequestParam boolean isDone,
+            @RequestParam(name = "description", defaultValue = "Processing...") String description,
             Model model
     ) {
-        Sale sale = new Sale(totalCost, name, cat, email, description, isDone);
+        Sale sale = new Sale(totalCost, name, cat, email, description);
         saleRepo.save(sale);
         List<Sale> sales = saleRepo.findAll();
         model.addAttribute("sales", sales);
 
-        return "main";
+        return "main_old";
     }
 
     @PostMapping("search")
     public String search() {
-        return "main";
+        return "main_old";
     }
 
     @Autowired

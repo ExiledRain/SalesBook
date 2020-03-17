@@ -1,0 +1,27 @@
+.zull{
+    background-image: url("../img_src/faze.png");
+    background-repeat: no-repeat;
+    height: 163px;
+    margin-top: 15px;
+    background-position: center;
+    /*width: 100%;*/
+    position: relative;
+}
+
+nav ul {
+    padding: 0;
+    text-align: center;
+    margin-top: 20px;
+    list-style-type: none;
+    border: 1px solid black;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav li a {
+    text-decoration: none;
+
+}

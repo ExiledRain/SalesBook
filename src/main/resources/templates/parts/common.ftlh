@@ -5,11 +5,14 @@
         <meta charset="UTF-8">
         <title>Sales Book</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Vue + Vue resource -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
               integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-        crossorigin="anonymous">
-        <link rel="stylesheet" href="./styles/sstyle.css">
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="../../static/styles/main_style.css">
     </head>
     <body>
 

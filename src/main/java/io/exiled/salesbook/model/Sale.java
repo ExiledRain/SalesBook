@@ -1,33 +1,28 @@
 package io.exiled.salesbook.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity(name = "sale")
+@Entity
+@Table(name = "sale")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private int totalCost;
     private String name;
     private String cat;
     private String email;
     private String description;
-    private boolean isDone;
 
     public Sale() {
     }
 
-    public Sale(int totalCost, String name, String cat, String email, String description, boolean isDone) {
+    public Sale(int totalCost, String name, String cat, String email, String description) {
         this.totalCost = totalCost;
         this.name = name;
         this.cat = cat;
         this.email = email;
         this.description = description;
-        this.isDone = isDone;
     }
 
     public Long getId() {
@@ -76,13 +71,5 @@ public class Sale {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
     }
 }
