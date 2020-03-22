@@ -91,8 +91,11 @@ Vue.component('sale-form', {
         },
         clear: function() {
             if(confirm("You really want to delete all entries?")) {
-                saleApi.clear({},this.sales);
-                this.$forceUpdate();
+                saleApi.clear().then(result => {
+                    if (result.ok) {
+                        this.sales.splice(0)
+                    }
+                })
             }
         }
     }
