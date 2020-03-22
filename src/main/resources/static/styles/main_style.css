@@ -4,16 +4,19 @@
     height: 163px;
     margin-top: 15px;
     background-position: center;
-    /*width: 100%;*/
     position: relative;
 }
 
 nav ul {
-    padding: 0;
+    padding: 15px;
+    font-size: large;
     text-align: center;
     margin-top: 20px;
     list-style-type: none;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid #dbdbd9;
+    background: #bdbdb9;
+    color: white;
 }
 
 nav li {
@@ -23,5 +26,52 @@ nav li {
 
 nav li a {
     text-decoration: none;
+    padding: 10px;
+    font-size: 15px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    margin: 0;
+}
 
+nav li a:hover {
+    background-color: darkcyan;
+    border: 1px solid black;
+    text-transform: uppercase;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15%;
+}
+
+.dform {
+    border: 1px lightgray solid;
+    width: 1200px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.button {
+    background: white;
+    padding: 5px;
+    text-decoration: none;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+}
+.button:hover {
+    text-transform: uppercase;
+}
+
+.btn-change1{
+    height: 50px;
+    width: 100px;
+    background: lightseagreen;
+    margin: 20px;
+    float: left;
+    border: 0px;
+    color: #fff;
+    box-shadow: 0 0 1px #ccc;
+    -webkit-transition-duration: 0.5s;
+    -webkit-box-shadow: 0px 0px 0 0 #31708f inset , 0px 0px 0 0 #31708f inset;
+}
+.btn-change1:hover{
+    -webkit-box-shadow: 50px 0px 0 0 #31708f inset , -50px 0px 0 0 #31708f inset;
 }

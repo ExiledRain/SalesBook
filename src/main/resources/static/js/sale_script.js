@@ -1,11 +1,5 @@
-// private Long id;
-//
-// private int totalCost;
-// private String name;
-// private String cat;
-// private String email;
-// private String description;
 // id,totalCost,name,cat,email,description
+
 function getIndex(list, id) {
     for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
@@ -21,8 +15,9 @@ let customActions = {
     addOne: {method: 'POST', url: '/sale/add'},
     updateOne: {method: 'PUT', url: '/sale/update{/id}'},
     getOne: {method: 'GET', url: '/sale/get{/id}'},
-    deleteOne: {method: 'DELETE', url: '/sale/delete{/id}'}
-}
+    deleteOne: {method: 'DELETE', url: '/sale/delete{/id}'},
+    clear: {method: 'DELETE' , url: '/sale/clear'}
+};
 
 let saleApi = Vue.resource('/sale/all', {}, customActions);
 
@@ -49,13 +44,14 @@ Vue.component('sale-form', {
         }
     },
     template:
-        '<div style="border: 1px lightgray solid; margin: 10px; padding: 5px">' +
+        '<div class="dform">' +
         '<input type="text" placeholder="Name:" v-model="name"/>' +
         '<input type="text" placeholder="Description:" v-model="description"/>' +
         '<input type="email" placeholder="Email:" v-model="email"/>' +
         '<input type="text" placeholder="Category:" v-model="cat"/>' +
-        '<input type="text" placeholder="Price:" v-model="totalCost"/>' +
-        '<input type="button" value="Save" v-on:click="save"/> ' +
+        '<input type="text" placeholder="Price:" v-model="totalCost"/></br>' +
+        '<input class="btn-change1" type="button" value="Save" v-on:click="save"/> ' +
+        '<input class="btn-change1" type="button" value="Delete All" @click="clear"/>' +
         '</div>',
     methods: {
         save: function () {
@@ -92,15 +88,22 @@ Vue.component('sale-form', {
                     })
                 )
             }
+        },
+        clear: function() {
+            if(confirm("You really want to delete all entries?")) {
+                saleApi.clear({},this.sales);
+                this.$forceUpdate();
+            }
         }
     }
-})
+});
 
 Vue.component('sale-row', {
-    props: ['sale', 'editsale', 'sales'],
+    props: ['sale', 'editsale', 'sales','counter','index'],
     template:
         '<tr>' +
         '<td><i>{{ sale.id }}</i></td>' +
+        '<td>{{index}}</td>' +
         '<td> {{ sale.name }} </td>' +
         '<td> {{ sale.description }} </td>' +
         '<td> {{ sale.cat }} </td>' +
@@ -118,11 +121,13 @@ Vue.component('sale-row', {
             this.editsale(this.sale)
         },
         del: function () {
-            saleApi.deleteOne({id: this.sale.id}).then(result => {
-                if (result.ok) {
-                    this.sales.splice(this.sales.indexOf(this.sale), 1)
-                }
-            })
+            if(confirm("Are you sure you want to delete " + this.sale.name + " ?")) {
+                saleApi.deleteOne({id: this.sale.id}).then(result => {
+                    if (result.ok) {
+                        this.sales.splice(this.sales.indexOf(this.sale), 1)
+                    }
+                })
+            }
         }
     }
 })
@@ -140,6 +145,7 @@ Vue.component('sales-list', {
         '<table>' +
         '<tr>' +
         '<td>Id:</td>' +
+        '<td>Counter:</td>' +
         '<td>Name:</td>' +
         '<td>Description:</td>' +
         '<td>Price:</td>' +
@@ -147,8 +153,8 @@ Vue.component('sales-list', {
         '<td>Email:</td>' +
         '<td style="border: none"></td>' +
         '</tr>' +
-        '<sale-row v-for="sale in sales" :key="sale.id" :sale="sale" ' +
-        ':sales="sales" :editsale="editsale"/>' +
+        '<sale-row v-for="(sale,index) in sales" :key="sale.id" :sale="sale" ' +
+        ':sales="sales" :editsale="editsale" :index="index+1"/>' +
         '</table>' +
         '</div>',
     created: function () {
@@ -163,12 +169,11 @@ Vue.component('sales-list', {
             this.sale = sale
         }
     }
-})
+});
 
 var app = new Vue({
     el: '#app',
     template: '<sales-list :sales="sales"/>',
     data: {
-        sales: []
-    }
-})
+        sales: [],    }
+});

@@ -47,6 +47,12 @@ public class SaleController {
     public void delete(@PathVariable("id") Sale sale) {
         saleRepo.delete(sale);
     }
+
+    @RequestMapping(value = "/clear", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void clear() {
+        saleRepo.deleteAll();
+    }
 }
 
 
