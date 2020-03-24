@@ -105,7 +105,7 @@ Vue.component('sale-row', {
     props: ['sale', 'editsale', 'sales','counter','index'],
     template:
         '<tr>' +
-        '<td><i>{{ sale.id }}</i></td>' +
+        '<td><i>{{ sale.id = index }}</i></td>' +
         '<td>{{index}}</td>' +
         '<td> {{ sale.name }} </td>' +
         '<td> {{ sale.description }} </td>' +
