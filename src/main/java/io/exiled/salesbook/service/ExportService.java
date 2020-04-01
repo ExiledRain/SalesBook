@@ -33,7 +33,6 @@ public class ExportService {
             document.close();
         } catch (Exception e) {
             System.err.println("Whops");
-            ;
         }
     }
 
