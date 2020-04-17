@@ -3,7 +3,6 @@ package io.exiled.salesbook.controller;
 import io.exiled.salesbook.model.Sale;
 import io.exiled.salesbook.repos.SaleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,7 @@ public class MainController {
     private SaleRepo saleRepo;
 
     @GetMapping("/m")
-    public String getSales(@RequestParam(required = false, defaultValue = "")String ename, Model model) {
+    public String getSales(@RequestParam(required = false, defaultValue = "") String ename, Model model) {
         List<Sale> sales = saleRepo.findAll();
         List<Sale> saleList = saleRepo.findByName(ename);
         model.addAttribute("saleList", saleList);
