@@ -16,12 +16,14 @@ public class ExportController {
         this.expo = expo;
     }
 
+    // creates pdf file
     @RequestMapping(value = "/make",method = RequestMethod.GET)
     @ResponseBody
     public void makeFile(){
         expo.createFile();
     }
 
+    // creates pdf table with DB dump
     @RequestMapping(value = "/table",method = RequestMethod.GET)
     @ResponseBody
     public void makeTable() {

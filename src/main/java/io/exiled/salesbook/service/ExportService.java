@@ -40,7 +40,7 @@ public class ExportService {
 
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("iTextTable.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("Exported/dumb.pdf"));
 
             document.open();
             Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
