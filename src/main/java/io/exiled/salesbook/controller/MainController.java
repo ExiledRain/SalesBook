@@ -16,9 +16,6 @@ import java.util.List;
 public class MainController {
     private SaleRepo saleRepo;
 
-    @Value("${upload.path}")
-    private String uploadPath;
-
     @GetMapping("/m")
     public String getSales(@RequestParam(required = false, defaultValue = "")String ename, Model model) {
         List<Sale> sales = saleRepo.findAll();
