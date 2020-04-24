@@ -7,6 +7,14 @@ function getIndex(list, id) {
     return -1;
 }
 
+let eventBus = new Vue();
+
+let export_commands = {
+    export: {method: 'GET', url: '/export/table'}
+}
+
+let nav_export = Vue.resource('/export/table', {}, export_commands);
+
 let customActions = {
     getAll: {method: 'GET', url: '/sale/all'},
     addOne: {method: 'POST', url: '/sale/add'},
@@ -17,6 +25,42 @@ let customActions = {
 };
 
 let saleApi = Vue.resource('/sale/all', {}, customActions);
+
+Vue.component('nav-bar', {
+    props: {
+        sales : {
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+        <nav>
+        <ul>
+            <li><input class="btn-change1" type="button" value="Export as PDF" @click="export_pdf"></li>
+            <li><input class="btn-change1" type="button" value="Delete all" @click="clear"/></li>
+        </ul>
+    </nav>`,
+    methods: {
+        export_pdf() {
+                nav_export.export().then(result => {
+                    if (result.ok) {
+                        alert("Export SUCCESS!\n You can find it in project folder by current time.")
+                    } else {
+                        alert("Export Failed!\n Please contact creator for future notice.")
+                    }
+                })
+        },
+        clear() {
+            if (confirm("You really want to delete all entries?")) {
+                saleApi.clear().then(result => {
+                    if (result.ok) {
+                        this.sales.splice(0)
+                    }
+                })
+            }
+        }
+    }
+})
 
 Vue.component('sale-form', {
     props: ['sales', 'saleAttr'],
@@ -54,13 +98,12 @@ Vue.component('sale-form', {
         '<input type="text" placeholder="Category:" v-model="cat"/>' +
         '<input type="text" placeholder="Price:" v-model="totalCost"/></br>' +
         '<input class="btn-change1" type="button" value="Save" v-on:click="save"/> ' +
-        '<input class="btn-change1" type="button" value="Delete All" @click="clear"/>' +
         '</div>',
     methods: {
         save: function () {
             this.errors = [];
             if (this.name) {
-            // if (this.name && this.totalCost && this.email && Number.isInteger(this.totalCost)) {
+                // if (this.name && this.totalCost && this.email && Number.isInteger(this.totalCost)) {
                 let sale = {
                     name: this.name,
                     description: this.description,
@@ -95,18 +138,9 @@ Vue.component('sale-form', {
                     )
                 }
             } else {
-                if(!this.name) this.errors.push("Please add the name")
-                if(!this.totalCost) this.errors.push("This is not a charity, add the price")
-                if(!this.email) this.errors.push("I'm no Santa give me the address")
-            }
-        },
-        clear: function () {
-            if (confirm("You really want to delete all entries?")) {
-                saleApi.clear().then(result => {
-                    if (result.ok) {
-                        this.sales.splice(0)
-                    }
-                })
+                if (!this.name) this.errors.push("Please add the name")
+                if (!this.totalCost) this.errors.push("This is not a charity, add the price")
+                if (!this.email) this.errors.push("I'm no Santa give me the address")
             }
         }
     }
@@ -186,8 +220,27 @@ Vue.component('sales-list', {
 
 var app = new Vue({
     el: '#app',
-    template: '<sales-list :sales="sales"/>',
+    template: `
+    <div>
+        <nav-bar :sales="sales" />
+        <sales-list :sales="sales"/>
+    </div>`,
     data: {
         sales: [],
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
