@@ -7,8 +7,6 @@ function getIndex(list, id) {
     return -1;
 }
 
-let eventBus = new Vue();
-
 let export_commands = {
     export: {method: 'GET', url: '/export/table'}
 }
@@ -147,7 +145,7 @@ Vue.component('sale-form', {
 });
 
 Vue.component('sale-row', {
-    props: ['sale', 'editsale', 'sales', 'counter', 'index'],
+    props: ['sale', 'editsale', 'sales', 'counter', 'index','filtered'],
     template:
         '<tr>' +
         '<td>{{index}}</td>' +
@@ -180,7 +178,7 @@ Vue.component('sale-row', {
 })
 
 Vue.component('sales-list', {
-    props: ['sales'],
+    props: ['sales','filtered'],
     data: function () {
         return {
             sale: null
@@ -189,7 +187,7 @@ Vue.component('sales-list', {
     template:
         '<div style="width: 50%;v-align: center">' +
         '<sale-form :sales="sales" :saleAttr="sale"/>' +
-        '<table>' +
+        '<table id="myTable">' +
         '<tr>' +
         '<td>Id:</td>' +
         '<td>Counter:</td>' +
@@ -200,8 +198,8 @@ Vue.component('sales-list', {
         '<td>Email:</td>' +
         '<td style="border: none"></td>' +
         '</tr>' +
-        '<sale-row v-for="(sale,index) in sales" :key="sale.id" :sale="sale" ' +
-        ':sales="sales" :editsale="editsale" :index="index+1"/>' +
+        '<sale-row v-for="(sale,index) in filtered" :key="sale.id" :sale="sale" ' +
+        ':sales="sales" :filtered="filtered" :editsale="editsale" :index="index+1"/>' +
         '</table>' +
         '</div>',
     created: function () {
@@ -223,10 +221,23 @@ var app = new Vue({
     template: `
     <div>
         <nav-bar :sales="sales" />
-        <sales-list :sales="sales"/>
+        <input style="position: absolute;bottom: 237px; left: 15px" class="form-control" type="text" v-model="s_query" placeholder="Search by name..." />
+        <sales-list :sales="sales" :filtered="filtered"/>
     </div>`,
     data: {
-        sales: [],
+        s_query: '',
+        sales: []
+    },
+    computed: {
+        filtered() {
+            if(this.s_query) {
+                return this.sales.filter((sale ) => {
+                    return sale.name.toLowerCase().includes(this.s_query.toLowerCase())
+                });
+            } else {
+                return this.sales;
+            }
+        }
     }
 });
 
