@@ -85,7 +85,8 @@ Vue.component('sale-form', {
     },
     template:
         '<div class="dform">' +
-        '<div v-show="this.errors">' +
+        '<div v-show="this.errors.length >= 1">' +
+        '<span style="color: darkred">Correct your input please:</span>' +
         '<ul>' +
         '<li v-for="(error,index) in errors" :key="index"> {{error}}</li>' +
         '</ul>' +
@@ -100,15 +101,15 @@ Vue.component('sale-form', {
     methods: {
         save: function () {
             this.errors = [];
-            if (this.name) {
-                // if (this.name && this.totalCost && this.email && Number.isInteger(this.totalCost)) {
+            // if (this.name) {
+                if (this.name && this.totalCost && (parseInt(this.totalCost).length != this.totalCost.length) && parseInt(this.totalCost)) {
                 let sale = {
                     name: this.name,
                     description: this.description,
                     id: this.id,
                     email: this.email,
                     cat: this.cat,
-                    totalCost: this.totalCost
+                    totalCost: parseInt(this.totalCost)
                 };
 
                 if (this.id) {
@@ -136,9 +137,10 @@ Vue.component('sale-form', {
                     )
                 }
             } else {
-                if (!this.name) this.errors.push("Please add the name")
-                if (!this.totalCost) this.errors.push("This is not a charity, add the price")
-                if (!this.email) this.errors.push("I'm no Santa give me the address")
+                if (!this.name) this.errors.push("Please add the Name");
+                if (this.totalCost && !parseInt(this.totalCost)) this.errors.push("Price should consist of numbers: 0-9");
+                if (!this.totalCost) this.errors.push("Please add the price");
+                if (!this.email) this.email = 'anonymous';
             }
         }
     }
@@ -221,7 +223,7 @@ var app = new Vue({
     template: `
     <div>
         <nav-bar :sales="sales" />
-        <input style="position: absolute;bottom: 237px; left: 15px" class="form-control" type="text" v-model="s_query" placeholder="Search by name..." />
+        <input style="position: relative;bottom: 100px; left: 15px" class="form-control" type="text" v-model="s_query" placeholder="Search by name..." />
         <sales-list :sales="sales" :filtered="filtered"/>
     </div>`,
     data: {

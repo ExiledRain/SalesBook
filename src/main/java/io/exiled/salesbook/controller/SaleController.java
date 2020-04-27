@@ -17,7 +17,7 @@ public class SaleController {
         this.saleRepo = saleRepo;
     }
 
-    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Sale> getAll() {
         return saleRepo.findAll();
@@ -25,11 +25,11 @@ public class SaleController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Sale add(@RequestBody Sale sale){
+    public Sale add(@RequestBody Sale sale) {
         return saleRepo.save(sale);
     }
 
-    @RequestMapping(value = "/get/{id}",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Sale getById(@RequestParam("id") Long id) {
         return saleRepo.getOne(id);
@@ -37,8 +37,8 @@ public class SaleController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Sale update(@PathVariable("id") Sale saleFromDb,@RequestBody Sale sale) {
-        BeanUtils.copyProperties(sale,saleFromDb,"id");
+    public Sale update(@PathVariable("id") Sale saleFromDb, @RequestBody Sale sale) {
+        BeanUtils.copyProperties(sale, saleFromDb, "id");
         return saleRepo.save(saleFromDb);
     }
 
@@ -53,6 +53,18 @@ public class SaleController {
     public void clear() {
         saleRepo.deleteAll();
     }
+
+//    private Sale validateSale(Sale source) {
+//        Sale checked = source;
+//        int checkedCost = Integer.valueOf(source.getTotalCost());
+//        checked.setTotalCost(checkedCost);
+//        String checkedEmail = source.getEmail();
+//        if(!checkedEmail.contains("@")) {
+//            checkedEmail = "anonymous@clinet.io";
+//            checked.setEmail(checkedEmail);
+//        }
+//        return checked;
+//    }
 }
 
 
