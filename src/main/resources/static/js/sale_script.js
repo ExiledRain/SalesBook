@@ -92,10 +92,10 @@ Vue.component('sale-form', {
         '</ul>' +
         '</div>' +
         '<input type="text" placeholder="Name:" v-model="name"/>' +
-        '<input type="text" placeholder="Description:" v-model="description"/>' +
         '<input type="email" placeholder="Email:" v-model="email"/>' +
         '<input type="text" placeholder="Category:" v-model="cat"/>' +
-        '<input type="text" placeholder="Price:" v-model="totalCost"/></br>' +
+        '<input type="text" placeholder="Price:" v-model="totalCost"/>' +
+        '<input type="text" placeholder="Description:" v-model="description"/></br>' +
         '<input class="btn-change1" type="button" value="Save" v-on:click="save"/> ' +
         '</div>',
     methods: {
@@ -152,10 +152,10 @@ Vue.component('sale-row', {
         '<tr>' +
         '<td>{{index}}</td>' +
         '<td> {{ sale.name }} </td>' +
-        '<td> {{ sale.description }} </td>' +
+        '<td> {{ sale.email }} </td>' +
         '<td> {{ sale.cat }} </td>' +
-        '<td> {{ sale.email }}</td>' +
         '<td> {{ sale.totalCost }}</td>' +
+        '<td> {{ sale.description }}</td>' +
         '<td style="border-bottom: 1px gray solid; border-radius: 10%">' +
         '<span style="position: absolute; right: 0">' +
         '<input type="button" value="Edit" v-on:click="edit">' +
@@ -191,13 +191,12 @@ Vue.component('sales-list', {
         '<sale-form :sales="sales" :saleAttr="sale"/>' +
         '<table id="myTable">' +
         '<tr>' +
-        '<td>Id:</td>' +
-        '<td>Counter:</td>' +
-        '<td>Name:</td>' +
-        '<td>Description:</td>' +
-        '<td>Price:</td>' +
-        '<td>Category:</td>' +
-        '<td>Email:</td>' +
+        '<td>#</td>' +
+        '<td>Name</td>' +
+        '<td>Email</td>' +
+        '<td>Category</td>' +
+        '<td>Price</td>' +
+        '<td>Description</td>' +
         '<td style="border: none"></td>' +
         '</tr>' +
         '<sale-row v-for="(sale,index) in filtered" :key="sale.id" :sale="sale" ' +
