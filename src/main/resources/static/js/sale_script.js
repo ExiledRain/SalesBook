@@ -26,7 +26,7 @@ let saleApi = Vue.resource('/sale/all', {}, customActions);
 
 Vue.component('nav-bar', {
     props: {
-        sales : {
+        sales: {
             type: Array,
             required: true
         }
@@ -40,13 +40,13 @@ Vue.component('nav-bar', {
     </nav>`,
     methods: {
         export_pdf() {
-                nav_export.export().then(result => {
-                    if (result.ok) {
-                        alert("Export SUCCESS!\n You can find it in project folder by current time.")
-                    } else {
-                        alert("Export Failed!\n Please contact creator for future notice.")
-                    }
-                })
+            nav_export.export().then(result => {
+                if (result.ok) {
+                    alert("Export SUCCESS!\n You can find it in project folder by current time.")
+                } else {
+                    alert("Export Failed!\n Please contact creator for future notice.")
+                }
+            })
         },
         clear() {
             if (confirm("You really want to delete all entries?")) {
@@ -102,7 +102,7 @@ Vue.component('sale-form', {
         save: function () {
             this.errors = [];
             // if (this.name) {
-                if (this.name && this.totalCost && (parseInt(this.totalCost).length != this.totalCost.length) && parseInt(this.totalCost)) {
+            if (this.name && this.totalCost && (parseInt(this.totalCost).length != this.totalCost.length) && parseInt(this.totalCost)) {
                 let sale = {
                     name: this.name,
                     description: this.description,
@@ -147,7 +147,7 @@ Vue.component('sale-form', {
 });
 
 Vue.component('sale-row', {
-    props: ['sale', 'editsale', 'sales', 'counter', 'index','filtered'],
+    props: ['sale', 'editsale', 'sales', 'counter', 'index', 'filtered'],
     template:
         '<tr>' +
         '<td>{{index}}</td>' +
@@ -180,7 +180,7 @@ Vue.component('sale-row', {
 })
 
 Vue.component('sales-list', {
-    props: ['sales','filtered'],
+    props: ['sales', 'filtered'],
     data: function () {
         return {
             sale: null
@@ -223,18 +223,28 @@ var app = new Vue({
     template: `
     <div>
         <nav-bar :sales="sales" />
-        <input style="position: relative;bottom: 100px; left: 15px" class="form-control" type="text" v-model="s_query" placeholder="Search by name..." />
+        <input style="position: relative;bottom: 100px; left: 15px" class="form-control" type="text" v-model="n_query" placeholder="Search by Name..." />
+        <input style="position: relative;bottom: 100px; left: 15px" class="form-control" type="text" v-model="c_query" placeholder="Search by Category..." />
         <sales-list :sales="sales" :filtered="filtered"/>
     </div>`,
     data: {
-        s_query: '',
+        n_query: '',
+        c_query: '',
         sales: []
     },
     computed: {
         filtered() {
-            if(this.s_query) {
-                return this.sales.filter((sale ) => {
-                    return sale.name.toLowerCase().includes(this.s_query.toLowerCase())
+            if (this.n_query && this.c_query) {
+                return this.sales.filter((sale) =>{
+                    return sale.name.toLowerCase().includes(this.n_query.toLowerCase()) && sale.cat.toLowerCase().includes(this.c_query.toLowerCase())
+                })
+            } else if (this.n_query) {
+                return this.sales.filter((sale) => {
+                    return sale.name.toLowerCase().includes(this.n_query.toLowerCase())
+                });
+            } else if (this.c_query) {
+                return this.sales.filter((sale) => {
+                    return sale.cat.toLowerCase().includes(this.c_query.toLowerCase())
                 });
             } else {
                 return this.sales;
