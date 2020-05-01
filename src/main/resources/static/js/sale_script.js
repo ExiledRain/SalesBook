@@ -34,8 +34,8 @@ Vue.component('nav-bar', {
     template: `
         <nav>
         <ul>
-            <li><input class="btn-change1" type="button" value="Export as PDF" @click="export_pdf"></li>
-            <li><input class="btn-change1" type="button" value="Delete all" @click="clear"/></li>
+            <li><input class="custom_button" type="button" value="Export as PDF" @click="export_pdf"></li>
+            <li><input class="custom_button" type="button" value="Delete all" @click="clear"/></li>
         </ul>
     </nav>`,
     methods: {
@@ -84,9 +84,10 @@ Vue.component('sale-form', {
         }
     },
     template:
-        '<div class="dform">' +
+        // '<div class="input_form">' +
+        '<div id="navbar" class="input_form">' +
         '<div v-show="this.errors.length >= 1">' +
-        '<span style="color: darkred">Correct your input please:</span>' +
+        '<span class="error_output">Correct your input please:</span>' +
         '<ul>' +
         '<li v-for="(error,index) in errors" :key="index"> {{error}}</li>' +
         '</ul>' +
@@ -95,8 +96,9 @@ Vue.component('sale-form', {
         '<input type="email" placeholder="Email:" v-model="email"/>' +
         '<input type="text" placeholder="Category:" v-model="cat"/>' +
         '<input type="text" placeholder="Price:" v-model="totalCost"/>' +
-        '<input type="text" placeholder="Description:" v-model="description"/></br>' +
-        '<input class="btn-change1" type="button" value="Save" v-on:click="save"/> ' +
+        // '<textarea type="text" size="50" placeholder="Description:" v-model="description"/></br>' +
+        '<textarea rows="4" cols="50" placeholder="Description:" v-model="description"/></br>' +
+        '<input class="custom_button" type="button" value="Save" v-on:click="save"/> ' +
         '</div>',
     methods: {
         save: function () {
@@ -149,17 +151,18 @@ Vue.component('sale-form', {
 Vue.component('sale-row', {
     props: ['sale', 'editsale', 'sales', 'counter', 'index', 'filtered'],
     template:
-        '<tr>' +
+        '<tr class="output_row">' +
         '<td>{{index}}</td>' +
         '<td> {{ sale.name }} </td>' +
         '<td> {{ sale.email }} </td>' +
         '<td> {{ sale.cat }} </td>' +
         '<td> {{ sale.totalCost }}</td>' +
         '<td> {{ sale.description }}</td>' +
-        '<td style="border-bottom: 1px gray solid; border-radius: 10%">' +
-        '<span style="position: absolute; right: 0">' +
-        '<input type="button" value="Edit" v-on:click="edit">' +
-        '<input type="button" value="X" v-on:click="del">' +
+        '<td>' +
+        '<td>' +
+        '<span class="hard_buttons">' +
+        '<input class="edit_button" type="button" value="Edit" v-on:click="edit">' +
+        '<input class="delete_button" type="button" value="X" v-on:click="del">' +
         '</span>' +
         '</td>' +
         '</tr>',
@@ -187,9 +190,9 @@ Vue.component('sales-list', {
         };
     },
     template:
-        '<div style="width: 50%;v-align: center">' +
+        '<div class="output_table">' +
         '<sale-form :sales="sales" :saleAttr="sale"/>' +
-        '<table id="myTable">' +
+        '<table>' +
         '<tr>' +
         '<td>#</td>' +
         '<td>Name</td>' +
@@ -197,7 +200,7 @@ Vue.component('sales-list', {
         '<td>Category</td>' +
         '<td>Price</td>' +
         '<td>Description</td>' +
-        '<td style="border: none"></td>' +
+        '<td style="border: none"> </td>' +
         '</tr>' +
         '<sale-row v-for="(sale,index) in filtered" :key="sale.id" :sale="sale" ' +
         ':sales="sales" :filtered="filtered" :editsale="editsale" :index="index+1"/>' +
@@ -222,8 +225,8 @@ var app = new Vue({
     template: `
     <div>
         <nav-bar :sales="sales" />
-        <input style="position: relative;bottom: 100px; left: 15px" class="form-control" type="text" v-model="n_query" placeholder="Search by Name..." />
-        <input style="position: relative;bottom: 100px; left: 15px" class="form-control" type="text" v-model="c_query" placeholder="Search by Category..." />
+        <input class="name_filter" type="text" v-model="n_query" placeholder="Filter by Name..." />
+        <input class="category_filter" type="text" v-model="c_query" placeholder="Filter by Category..." />
         <sales-list :sales="sales" :filtered="filtered"/>
     </div>`,
     data: {

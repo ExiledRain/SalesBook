@@ -1,4 +1,6 @@
-.zull{
+/* Main color code : #66c7ce*/
+
+.heading{
     background-image: url("../img_src/faze.png");
     background-repeat: no-repeat;
     height: 163px;
@@ -13,7 +15,7 @@ nav ul {
     text-align: center;
     margin-top: 20px;
     list-style-type: none;
-    border-top: 1px solid black;
+    border-top: 3px double black;
     border-bottom: 1px solid #dbdbd9;
     background: #bdbdb9;
     color: white;
@@ -42,11 +44,78 @@ nav li a:hover {
     border-radius: 15%;
 }
 
-.dform {
-    border: 1px lightgray solid;
+.input_form{
+    border: 1px #66c7ce solid;
     width: 1200px;
-    margin: 10px;
+    /*text-align: center;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     padding: 5px;
+    /*vertical-align: center;*/
+}
+
+/*#navbar {*/
+/*    overflow: hidden;*/
+/*    background-color: #333;*/
+/*}*/
+
+.input_form textarea{
+    width: 100px;
+    height: 30px;
+}
+.error_output {
+    color: darkred;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky + .content {
+    padding-top: 60px;
+}
+
+.name_filter {
+    position: relative;
+    bottom: 83px;
+    left: 15px
+}
+.category_filter{
+    display: block;
+    position: relative;
+    bottom: 70px;
+    left: 15px
+}
+
+.output_table table,tr{
+    width: 70%;
+    /*box-sizing: border-box;*/
+    /*v-align: center;*/
+    /*border-spacing: 15px;*/
+    /*padding: 10px;*/
+    border-collapse: collapse;
+    /*padding: 30px;*/
+
+    /* Makes all borders as one*/
+    /*border-collapse: collapse;*/
+
+}
+
+.output_table tr {
+    margin-top: 100px;
+    /*border-spacing: 15px;*/
+
+}
+
+.output_table tr:nth-child(even) {
+    background-color: #eee;
+}
+
+.output_table tr:nth-child(odd) {
+    background-color: #fff;
 }
 
 .button {
@@ -60,18 +129,45 @@ nav li a:hover {
     text-transform: uppercase;
 }
 
-.btn-change1{
-    height: 50px;
+.delete_button{
+    padding-left: 10px;
+    margin-left: 15px;
+}
+
+.edit_button{
+    padding-left: 10px;
+    margin-left: 15px;
+
+
+}
+
+.hard_buttons {
+    /*position: relative;*/
+    /*display: inline-block;*/
+    /*right: 30px;*/
+    /*padding: 10px*/
+    /*left: 100px*/
+    /*valign: right;*/
+}
+
+
+.output_row {
+    /*margin-top: 20px;*/
+}
+
+.custom_button{
+    height: 36px;
     width: 100px;
-    background: lightseagreen;
+    /*background: lightseagreen;*/
+    background: #66c7ce;
     margin: 10px;
-    float: left;
+    /*float: right;*/
     border: 0px;
     color: #fff;
     box-shadow: 0 0 1px #ccc;
     -webkit-transition-duration: 0.5s;
     -webkit-box-shadow: 0px 0px 0 0 #31708f inset , 0px 0px 0 0 #31708f inset;
 }
-.btn-change1:hover{
+.custom_button:hover{
     -webkit-box-shadow: 50px 0px 0 0 #31708f inset , -50px 0px 0 0 #31708f inset;
 }
