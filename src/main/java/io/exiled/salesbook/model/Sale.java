@@ -14,6 +14,7 @@ public class Sale {
     private String cat;
     private String email;
     private String description;
+    private boolean isPaid;
 
     public Sale() {
     }
@@ -24,6 +25,7 @@ public class Sale {
         this.cat = cat;
         this.email = email;
         this.description = description;
+        this.isPaid = false;
     }
 
     public Long getId() {
@@ -72,5 +74,13 @@ public class Sale {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
     }
 }

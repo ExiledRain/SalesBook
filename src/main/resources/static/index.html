@@ -11,14 +11,14 @@
 </head>
 <body>
 <header class="heading"></header>
-<div id="app">
+<div sytle="margin: 0;padding: 0" id="app">
 </div>
 <script src="./js/sale_script.js"></script>
 <script>
     window.onscroll = function() {myFunction()};
 
-    var navbar = document.getElementById("navbar");
-    var sticky = navbar.offsetTop;
+    let navbar = document.getElementById("navbar");
+    let sticky = navbar.offsetTop;
 
     function myFunction() {
         if (window.pageYOffset >= sticky) {
