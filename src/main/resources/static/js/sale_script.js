@@ -153,7 +153,7 @@ Vue.component('sale-row', {
     props: ['sale', 'editsale', 'sales', 'counter', 'index', 'filtered'],
     template:
         `
-        <tr :style="sale.completed ? 'background-color: #80ff80;': 'background-color: inherited;'">
+        <tr v-bind:style="!sale.completed ? 'background-color: inherited;' : 'background-color: #80ff80;'">
         <td style="text-align: center;border-right: 1px solid #31708f;">{{index}}</td>
         <td>{{ sale.name }}</td>
         <td>{{ sale.email }}</td>
