@@ -15,10 +15,8 @@
 }
 
 .controlls {
-    /*padding: 10px;*/
     font-size: large;
     text-align: center;
-    /*width: 100%;*/
     margin-top: -25px;
     margin-bottom: 8px;
     padding-bottom: 0px;
@@ -49,10 +47,6 @@
     margin: 10px;
     padding: 10px;
     border-radius: 15%;
-}
-
-.error_output span {
-    margin-top: 10px;
 }
 
 .error_output ul {
@@ -90,14 +84,16 @@
 
 .name_filter {
     position: relative;
-    top: 27px;
+    top: 26px;
     left: 15px;
+    height: 12px;
 }
 
 .category_filter {
     display: block;
     position: relative;
-    top: 29px;
+    top: 30px;
+    height: 12px;
     left: 15px;
 }
 
@@ -163,15 +159,14 @@
 
 .output_row {
     /*margin-top: 20px;*/
+    /*background-color: blue;*/
 }
 
 .custom_button {
     height: 36px;
     width: 100px;
-    /*background: lightseagreen;*/
     background: #66c7ce;
     margin: 10px;
-    /*float: right;*/
     border: 0px;
     color: #fff;
     box-shadow: 0 0 1px #ccc;
@@ -181,4 +176,9 @@
 
 .custom_button:hover {
     -webkit-box-shadow: 50px 0px 0 0 #31708f inset, -50px 0px 0 0 #31708f inset;
+}
+
+.completed {
+    color: #80ff80;
+    background-color: darkred;
 }

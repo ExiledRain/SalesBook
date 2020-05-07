@@ -126,6 +126,14 @@
             <version>1.56</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-core</artifactId>-->
+<!--            <version>6.4.1</version>-->
+<!--        </dependency>-->
+
+
     </dependencies>
 
     <build>

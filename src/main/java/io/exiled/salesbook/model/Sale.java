@@ -1,7 +1,6 @@
 package io.exiled.salesbook.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "sale")
@@ -14,18 +13,19 @@ public class Sale {
     private String cat;
     private String email;
     private String description;
-    private boolean isPaid;
+
+    private boolean completed;
 
     public Sale() {
     }
 
-    public Sale(int totalCost, String name, String cat, String email, String description) {
+    public Sale(int totalCost, String name, String cat, String email, String description, boolean completed) {
         this.totalCost = totalCost;
         this.name = name;
         this.cat = cat;
         this.email = email;
         this.description = description;
-        this.isPaid = false;
+        this.completed = completed;
     }
 
     public Long getId() {
@@ -76,11 +76,11 @@ public class Sale {
         this.description = description;
     }
 
-    public boolean isPaid() {
-        return isPaid;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

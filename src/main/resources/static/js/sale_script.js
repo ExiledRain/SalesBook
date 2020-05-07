@@ -33,7 +33,7 @@ Vue.component('nav-bar', {
     },
     template:
     `<div class="controlls">
-        <input class="custom_button" type="button" value="Export as PDF" @click="export_pdf">
+        <input class="custom_button" type="button" value="Export PDF" @click="export_pdf">
         <input class="custom_button" type="button" value="Delete all" @click="clear"/>
     </div>`
     ,
@@ -69,7 +69,7 @@ Vue.component('sale-form', {
             totalCost: '',
             email: '',
             id: '',
-            isPaid: false,
+            completed: false,
             errors: []
         }
     },
@@ -80,14 +80,14 @@ Vue.component('sale-form', {
             this.cat = newVal.cat;
             this.totalCost = newVal.totalCost;
             this.description = newVal.description;
+            this.completed = Boolean(newVal.completed);
             this.id = newVal.id;
-            this.isPaid = newVal.isPaid;
         }
     },
     template:
         '<div id="navbar" class="input_form">' +
-        '<div class="error_output" v-show="this.errors.length >= 1">' +
-        '<span>Correct your input please:</span>' +
+        '<div style="padding-left: 10px;border: 3px double red;" v-show="this.errors.length >= 1">' +
+        '<h4>Correct your input please:</h4>' +
         '<ul>' +
         '<li v-for="(error,index) in errors" :key="index"> {{error}}</li>' +
         '</ul>' +
@@ -97,22 +97,21 @@ Vue.component('sale-form', {
         '<input type="text" placeholder="Category:" v-model="cat"/>' +
         '<input type="text" placeholder="Price:" v-model="totalCost"/>' +
         '<input type="text" size="50" placeholder="Description:" v-model="description"/></br>' +
-        '<input type="checkbox" id="paid" value="unchecked" v-model="isPaid"/><label for="paid">Is Paid</label> ' +
-        // '<textarea rows="4" cols="50" placeholder="Description:" v-model="description"/></br>' +
+        '<input type="checkbox" id="checkbox" v-model="completed"/><label for="checkbox">Is Paid</label> ' +
         '<input class="custom_button" type="button" value="Save" v-on:click="save"/> ' +
         '</div>',
     methods: {
         save: function () {
             this.errors = [];
-            if (this.name && this.totalCost && (parseInt(this.totalCost).length != this.totalCost.length) && parseInt(this.totalCost)) {
+            if (this.name && this.totalCost && parseInt(this.totalCost)) {
                 let sale = {
                     name: this.name,
                     description: this.description,
                     id: this.id,
                     email: this.email,
                     cat: this.cat,
-                    isPaid: this.isPaid,
-                    totalCost: parseInt(this.totalCost)
+                    totalCost: parseInt(this.totalCost),
+                    completed: Boolean(this.completed),
                 };
 
                 if (this.id) {
@@ -125,8 +124,8 @@ Vue.component('sale-form', {
                             this.description = '';
                             this.cat = '';
                             this.email = '';
-                            this.isPaid = false;
                             this.totalCost = '';
+                            this.completed = false;
                         }))
                 } else {
                     saleApi.addOne({}, sale).then(result =>
@@ -136,8 +135,8 @@ Vue.component('sale-form', {
                             this.description = '';
                             this.cat = '';
                             this.email = '';
+                            this.completed = false;
                             this.totalCost = '';
-                            this.isPaid = false;
                         })
                     )
                 }
@@ -153,18 +152,19 @@ Vue.component('sale-form', {
 Vue.component('sale-row', {
     props: ['sale', 'editsale', 'sales', 'counter', 'index', 'filtered'],
     template:
-        '<tr class="output_row">' +
-        '<td style="text-align: center;border-right: 1px solid #31708f;">{{index}}</td>' +
-        '<td>{{ sale.name }}</td>' +
-        '<td>{{ sale.email }}</td>' +
-        '<td>{{ sale.cat }}</td>' +
-        '<td style="text-align:center">{{ sale.totalCost }} €</td>' +
-        '<td>{{ sale.description }}</td>' +
-        '<td class="hard_buttons">' +
-        '<input class="edit_button" type="button" value="Edit" v-on:click="edit">' +
-        '<input class="delete_button" type="button" value="X" v-on:click="del">' +
-        '</td>' +
-        '</tr>',
+        `
+        <tr :style="sale.completed ? 'background-color: #80ff80;': 'background-color: inherited;'">
+        <td style="text-align: center;border-right: 1px solid #31708f;">{{index}}</td>
+        <td>{{ sale.name }}</td>
+        <td>{{ sale.email }}</td>
+        <td>{{ sale.cat }}</td>
+        <td style="text-align:center">{{ sale.totalCost }} €</td>
+        <td>{{ sale.description }}</td>
+        <td class="hard_buttons">
+        <input class="edit_button" type="button" value="Edit" v-on:click="edit">
+        <input class="delete_button" type="button" value="X" v-on:click="del">
+        </td>
+        </tr>`,
     methods: {
         edit: function () {
             this.editsale(this.sale)
@@ -223,10 +223,8 @@ var app = new Vue({
     el: '#app',
     template: `
     <div>
-<!--        <div class="filters">-->
         <input class="name_filter" type="text" v-model="n_query" placeholder="Filter by Name..." />
         <input class="category_filter" type="text" v-model="c_query" placeholder="Filter by Category..." />
-<!--        </div>        -->
         <nav-bar :sales="sales" />
         <sales-list :sales="sales" :filtered="filtered"/>
     </div>`,
