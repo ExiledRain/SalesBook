@@ -1,0 +1,184 @@
+/* Main color code : #66c7ce*/
+/* Is Paid bg color : #80ff80*/
+.body {
+    margin-left: -15px;
+    padding-left: 0px;
+}
+
+.heading {
+    background-image: url("../img_src/faze.png");
+    background-repeat: no-repeat;
+    height: 163px;
+    margin-top: 14px;
+    background-position: center;
+    position: relative;
+}
+
+.controlls {
+    font-size: large;
+    text-align: center;
+    margin-top: -25px;
+    margin-bottom: 8px;
+    padding-bottom: 0px;
+    list-style-type: none;
+    border-top: 3px double black;
+    border-bottom: 1px solid #dbdbd9;
+    background: #bdbdb9;
+    color: white;
+}
+
+.controlls input {
+    margin-right: 15px;
+}
+
+.controlls input a {
+    text-decoration: none;
+    padding: 10px;
+    font-size: 15px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    margin: 0;
+}
+
+.controlls input a:hover {
+    background-color: darkcyan;
+    border: 1px solid black;
+    text-transform: uppercase;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15%;
+}
+
+.error_output ul {
+    list-style-type: circle;
+}
+
+.input_form {
+    border: 1px #66c7ce solid;
+    margin-top: -10px;
+    background-color: #a6a6a6;
+    padding: 5px;
+    position: relative;
+}
+
+.input_form input {
+    padding: 5px;
+    margin: 7px;
+}
+
+.input_form textarea {
+    width: 500px;
+    height: 30px;
+}
+
+.error_output {
+    color: darkred;
+    border: 1px solid green;
+}
+
+.sticky {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+}
+
+.name_filter {
+    position: relative;
+    top: 26px;
+    left: 15px;
+    height: 12px;
+}
+
+.category_filter {
+    display: block;
+    position: relative;
+    top: 30px;
+    height: 12px;
+    left: 15px;
+}
+
+.filters {
+    position: relative;
+    padding: 50px;
+    top: 25px;
+}
+
+.output_table table, tr {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #31708f;
+}
+
+.output_table td {
+    padding: 3px 5px 3px 5px;
+    text-align: left;
+}
+
+.output_table tr:nth-child(even) {
+    background-color: #eee;
+}
+
+.output_table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.button {
+    background: white;
+    padding: 5px;
+    text-decoration: none;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    }
+
+.button:hover {
+    text-transform: uppercase;
+}
+
+.delete_button {
+    /*padding-left: 10px;*/
+    /*margin-left: 15px;*/
+}
+
+.edit_button {
+    /*padding-left: 10px;*/
+    /*margin-left: 15px;*/
+
+
+}
+
+.hard_buttons {
+    width: 50px;
+    right: 0px;
+}
+
+.hard_buttons input {
+    width: 50px;
+    right: 0;
+}
+
+
+.output_row {
+    /*margin-top: 20px;*/
+    /*background-color: blue;*/
+}
+
+.custom_button {
+    height: 36px;
+    width: 100px;
+    background: #66c7ce;
+    margin: 10px;
+    border: 0px;
+    color: #fff;
+    box-shadow: 0 0 1px #ccc;
+    -webkit-transition-duration: 0.5s;
+    -webkit-box-shadow: 0px 0px 0 0 #31708f inset, 0px 0px 0 0 #31708f inset;
+}
+
+.custom_button:hover {
+    -webkit-box-shadow: 50px 0px 0 0 #31708f inset, -50px 0px 0 0 #31708f inset;
+}
+
+.completed {
+    color: #80ff80;
+    background-color: darkred;
+}
