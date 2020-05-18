@@ -39,13 +39,14 @@ Vue.component('nav-bar', {
     ,
     methods: {
         export_pdf() {
-            nav_export.export().then(result => {
-                if (result.ok) {
-                    alert("Export SUCCESS!\n You can find it in 'Exported' folder by current time stamp.")
-                } else {
-                    alert("Export Failed!\n Please contact administrator for help.")
-                }
-            })
+            alert("This feature currently available only for local version.")
+            // nav_export.export().then(result => {
+            //     if (result.ok) {
+            //         alert("Export SUCCESS!\n You can find it in 'Exported' folder by current time stamp.")
+            //     } else {
+            //         alert("Export Failed!\n Please contact administrator for help.")
+            //     }
+            // })
         },
         clear() {
             if (confirm("You really want to delete all entries?")) {
