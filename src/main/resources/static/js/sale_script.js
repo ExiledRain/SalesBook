@@ -33,13 +33,13 @@ Vue.component('nav-bar', {
     },
     template:
     `<div class="controlls">
-        <input class="custom_button" type="button" value="Export PDF" @click="export_pdf">
+        <input class="custom_button" type="button" value="Export PDF v2" @click="export_pdf">
         <input class="custom_button" type="button" value="Delete all" @click="clear"/>
     </div>`
     ,
     methods: {
         export_pdf() {
-            alert("This feature currently available only for local version.")
+            alert("This feature currently available only for local version.");
             // nav_export.export().then(result => {
             //     if (result.ok) {
             //         alert("Export SUCCESS!\n You can find it in 'Exported' folder by current time stamp.")
