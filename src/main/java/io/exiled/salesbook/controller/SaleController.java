@@ -53,18 +53,6 @@ public class SaleController {
     public void clear() {
         saleRepo.deleteAll();
     }
-
-//    private Sale validateSale(Sale source) {
-//        Sale checked = source;
-//        int checkedCost = Integer.valueOf(source.getTotalCost());
-//        checked.setTotalCost(checkedCost);
-//        String checkedEmail = source.getEmail();
-//        if(!checkedEmail.contains("@")) {
-//            checkedEmail = "anonymous@clinet.io";
-//            checked.setEmail(checkedEmail);
-//        }
-//        return checked;
-//    }
 }
 
 
