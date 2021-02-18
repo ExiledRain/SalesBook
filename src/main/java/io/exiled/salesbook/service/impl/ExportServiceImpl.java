@@ -102,31 +102,6 @@ public class ExportServiceImpl implements ExportService {
         doc.close();
     }
 
-    private void addTableHeader(PdfPTable table) {
-        Stream.of("No:", "Name:", "Email:", "Price:", "Description:", "Category")
-                .forEach(columnTitle -> {
-                    PdfPCell header = new PdfPCell();
-                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                    header.setBorderWidth(2);
-                    header.setPadding(5.0f);
-                    header.setPhrase(new Phrase(columnTitle));
-                    table.addCell(header);
-                });
-    }
-
-    private void addRows(PdfPTable table) {
-        List<Sale> col = saleRepo.findAll();
-        for (int i = 0; i < col.size(); i++) {
-            table.addCell("" + (i + 1));
-            table.addCell(col.get(i).getName());
-            table.addCell(col.get(i).getEmail());
-            table.addCell("" + col.get(i).getTotalCost());
-            table.addCell(col.get(i).getDescription());
-            table.addCell(col.get(i).getCat());
-        }
-
-    }
-
     public List<Sale> getRecords() {
         return saleRepo.findAll();
     }
