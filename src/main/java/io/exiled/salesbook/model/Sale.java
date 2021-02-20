@@ -1,7 +1,12 @@
 package io.exiled.salesbook.model;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
+@ApiModel(description = "Details about the sale")
 @Entity
 @Table(name = "sale")
 public class Sale {
@@ -9,6 +14,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int totalCost;
+    @ApiModelProperty(notes = "Buyers name")
     private String name;
     private String cat;
     private String email;

@@ -2,6 +2,8 @@ package io.exiled.salesbook.controller;
 
 import io.exiled.salesbook.model.Sale;
 import io.exiled.salesbook.repos.SaleRepo;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +25,16 @@ public class SaleController {
         return saleRepo.findAll();
     }
 
+    @ApiOperation(value = "Adds new Sale",notes = "Creates an entirely new Sale",response = Sale.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Sale add(@RequestBody Sale sale) {
         return saleRepo.save(sale);
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @RequestMapping( value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Sale getById(@RequestParam("id") Long id) {
+    public Sale getById(@ApiParam(value = "ID for the sale you need to retrieve", required = true)@RequestParam("id") Long id) {
         return saleRepo.getOne(id);
     }
 
