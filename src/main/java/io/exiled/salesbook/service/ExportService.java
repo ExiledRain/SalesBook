@@ -21,4 +21,6 @@ public interface ExportService {
      * @return records from database as List of Sale
      * */
     List<Sale> getRecords();
+
+    void setDestination(String destination);
 }

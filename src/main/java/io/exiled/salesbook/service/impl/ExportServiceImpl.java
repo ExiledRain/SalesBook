@@ -13,19 +13,15 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import io.exiled.salesbook.model.Sale;
 import io.exiled.salesbook.repos.SaleRepo;
 import io.exiled.salesbook.service.ExportService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Implementation of {@link io.exiled.salesbook.service.ExportService} interface.
@@ -37,16 +33,18 @@ import java.util.stream.Stream;
 @Service("export")
 public class ExportServiceImpl implements ExportService {
     private SaleRepo saleRepo;
+    @Value("baseDir")
+    private static final String baseDir = "";
+    private static String destination = baseDir + "Exported/dumb.pdf";
 
     public ExportServiceImpl(SaleRepo saleRepo) {
         this.saleRepo = saleRepo;
     }
 
     public void manipulatePdf() throws Exception {
-        String dest = "Exported/dumb.pdf";
-        File file = new File(dest);
+        File file = new File(destination);
         file.getParentFile().mkdirs();
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest));
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(destination));
         Document doc = new Document(pdfDoc);
         float[] columnWidths = {1, 5, 5, 5, 5, 7};
         Table table = new Table(UnitValue.createPercentArray(columnWidths));
@@ -104,5 +102,10 @@ public class ExportServiceImpl implements ExportService {
 
     public List<Sale> getRecords() {
         return saleRepo.findAll();
+    }
+
+    @Override
+    public void setDestination(String destination) {
+        ExportServiceImpl.destination = destination;
     }
 }
