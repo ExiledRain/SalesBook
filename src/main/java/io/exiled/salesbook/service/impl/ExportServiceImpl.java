@@ -17,7 +17,6 @@ import com.itextpdf.text.Font;
 import io.exiled.salesbook.model.Sale;
 import io.exiled.salesbook.repos.SaleRepo;
 import io.exiled.salesbook.service.ExportService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -33,11 +32,13 @@ import java.util.List;
 @Service("export")
 public class ExportServiceImpl implements ExportService {
     private SaleRepo saleRepo;
-    @Value("baseDir")
-    private static final String baseDir = "";
-    private static String destination = baseDir + "Exported/dumb.pdf";
+    private String baseDir;
+    private String fileName = "/dumb.pdf";
+
+    private String destination = baseDir + fileName;
 
     public ExportServiceImpl(SaleRepo saleRepo) {
+        setBaseDir();
         this.saleRepo = saleRepo;
     }
 
@@ -106,6 +107,16 @@ public class ExportServiceImpl implements ExportService {
 
     @Override
     public void setDestination(String destination) {
-        ExportServiceImpl.destination = destination;
+        this.destination = destination;
+    }
+
+    @Override
+    public String getDestination() {
+        return destination;
+    }
+
+    private void setBaseDir() {
+        this.baseDir = System.getProperty("user.home") + "/export";
+        this.destination = baseDir + fileName;
     }
 }

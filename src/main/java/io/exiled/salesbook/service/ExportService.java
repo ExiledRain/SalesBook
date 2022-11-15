@@ -23,4 +23,6 @@ public interface ExportService {
     List<Sale> getRecords();
 
     void setDestination(String destination);
+
+    String getDestination();
 }

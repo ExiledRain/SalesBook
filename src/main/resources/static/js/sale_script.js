@@ -8,7 +8,9 @@ function getIndex(list, id) {
 }
 
 let export_commands = {
-    export: {method: 'GET', url: '/export/table'}
+    export_pdf: {method: 'GET', url: '/export/table'},
+    getDest: {method: 'GET', url: '/export/get'},
+    setDest: {method: 'POST', url: '/export/set'}
 }
 
 let nav_export = Vue.resource('/export/table', {}, export_commands);
@@ -34,12 +36,14 @@ Vue.component('nav-bar', {
     template:
     `<div class="controlls">
         <input class="custom_button" type="button" value="Export PDF" @click="export_pdf">
+        <input class="custom_button" type="button" value="Get export path" @click="getDest"/>
+        <input class="custom_button" type="button" value="Set export path" @click="setDest"/>
         <input class="custom_button" type="button" value="Delete all" @click="clear"/>
     </div>`
     ,
     methods: {
         export_pdf() {
-            nav_export.export().then(result => {
+            nav_export.export_pdf().then(result => {
                 if (result.ok) {
                     alert("Export SUCCESS!\n You can find it in 'Exported' folder by current time stamp.")
                 } else {
@@ -55,6 +59,21 @@ Vue.component('nav-bar', {
                     }
                 })
             }
+        },
+        getDest() {
+            nav_export.getDest().then(result => {
+                alert("Current export destination is: " + result.bodyText);
+            })
+        },
+        setDest() {
+            let desiredPath = prompt("Please specify the route to exported pdf file: ","");
+            if(desiredPath === null || desiredPath.toString().length < 5) {
+                alert("New destination is set incorrectly, no changes would be made");
+                return;
+            }
+            nav_export.setDest(desiredPath).then(result => {
+                alert("New destination is set to export pdf: " + desiredPath);
+            })
         }
     }
 })
@@ -92,11 +111,11 @@ Vue.component('sale-form', {
         '<li v-for="(error,index) in errors" :key="index"> {{error}}</li>' +
         '</ul>' +
         '</div>' +
-        '<input type="text" placeholder="Name:" v-model="name"/>' +
-        '<input type="email" placeholder="Email:" v-model="email"/>' +
-        '<input type="text" placeholder="Category:" v-model="cat"/>' +
-        '<input type="text" placeholder="Price:" v-model="totalCost"/>' +
-        '<input type="text" size="50" placeholder="Description:" v-model="description"/></br>' +
+        '<input type="text" placeholder="имя/name/nimi" v-model="name"/>' +
+        '<input type="email" placeholder="email" v-model="email"/>' +
+        '<input type="text" placeholder="категория/category/kategooria" v-model="cat"/>' +
+        '<input type="text" placeholder="цена/price/hind" v-model="totalCost"/>' +
+        '<input type="text" size="50" placeholder="описание/description/kirjeldus" v-model="description"/></br>' +
         '<input type="checkbox" id="checkbox" v-model="completed"/><label for="checkbox">Is Paid</label> ' +
         '<input class="custom_button" type="button" value="Save" v-on:click="save"/> ' +
         '</div>',
